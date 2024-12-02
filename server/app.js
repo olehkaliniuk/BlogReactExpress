@@ -76,6 +76,17 @@ app.get("/myposts", async (req, res) => {
   }
 });
 
+
+app.get("/username", async (req, res) => {
+  const id = req.query.id; 
+  const [rows] = await connection.query("SELECT user_name FROM users WHERE id = ?", [id]);
+  if (rows.length > 0) {
+    res.json(rows[0].user_name);
+  } else {
+    res.status(404).json({ error: "User not found" });
+  }
+});
+
 // Delete post
 app.delete('/:id', async (req, res) => {
   const { id } = req.params;

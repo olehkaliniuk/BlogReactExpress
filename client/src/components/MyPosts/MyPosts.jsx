@@ -43,7 +43,7 @@ function MyPosts() {
           posts.length > 0 ? (
             posts.map((post, index) => (
               <div key={index} className='maphome'>
-                <p>{post.title} - {post.description} - {post.likes} user_id:{post.user_id}</p>
+                <p>{post.title} - {post.description} - {post.likes}</p>
                 <button onClick={() => handleDelete(post.id)} className='buttonlike'>Delete</button>
               </div>
             ))

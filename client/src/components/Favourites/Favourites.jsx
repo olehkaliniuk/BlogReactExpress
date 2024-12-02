@@ -7,10 +7,20 @@ function Favourites() {
 
   const[posts, setPosts] = useState([]);
 
-  const fetchAPI = async () =>{
-    const response = await axios.get("http://localhost:8080")
-    setPosts(response.data)
-  }
+  const fetchAPI = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080");
+      const postsData = await Promise.all(response.data.map(async post => {
+        const userResponse = await axios.get('http://localhost:8080/username', {
+          params: { id: post.user_id }
+        });
+        return { ...post, username: userResponse.data };
+      }));
+      setPosts(postsData);
+    } catch (error) {
+      console.error("Error fetching data", error);
+    }
+  };
 
   useEffect(()=>{
     fetchAPI()
@@ -36,7 +46,7 @@ function Favourites() {
     .sort((a, b) => b.likes - a.likes)  
     .map((post, index) => (
       <div key={index} className='maphome'>
-        <p>{post.title} - {post.description} - {post.likes} - user_id:{post.user_id}</p>
+        <p>{post.title} - {post.description} - {post.likes} - user_id:{post.user_id} - user_name : {post.username}</p>
         <div>
         <button className='buttoncomment'>Add comment</button>
         <button onClick={() => handleLike(post.id)} className='buttonlike'>Like</button>
