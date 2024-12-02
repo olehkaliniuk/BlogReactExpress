@@ -1,0 +1,36 @@
+.navcontainer{
+    display: flex;
+    padding: 10px;
+    column-gap: 20px;
+    background-color: #ffffff;
+    justify-content: space-between;
+    border-radius: 15px;
+    margin: 20px;
+    border: 2px solid #000000;
+}
+
+.navlink{
+    text-decoration: none;
+    color: #000000;
+    font-size: 20px;
+    font-weight: 400;
+    margin-left: 20px;
+    
+}
+
+.logo{
+    list-style-type: none;
+    font-size: 20px;
+    font-weight: 500;
+    color: #000000;
+}
+
+.logoutbtn{
+    background-color: #ffffff;
+    border: none;
+    font-size: 20px;
+    font-weight: 400;
+    margin-left: 20px;
+    color: #000000;
+    cursor: pointer;
+}

@@ -1,0 +1,45 @@
+.homecontainer{
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        column-gap: 20px;
+        background-color: #ffffff;
+        border: 2px solid #000;
+        border-radius: 15px;
+        margin: 20px;
+        height: 500px;
+        color: #000000;
+        font-size: 20px;
+        font-weight: 400;
+        row-gap: 20px;
+}
+
+
+/* Home */
+.maphome{
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 2px solid #000;
+}
+.buttoncomment{
+        background-color: #ffffff;
+        color: #000;
+        border: none;
+        border-top: 2px solid #000000;
+        border-left: 2px solid #000000;
+        border-right: 2px solid #000000;
+        padding: 10px;
+}
+.buttonlike{
+        color: #ffffff;
+        background-color: #000000;
+        border: 2px solid #000000;
+        padding: 10px;
+ 
+}
+
+.firstcont{
+        display: flex;
+        flex-direction: column;
+        row-gap: 15px;
+}

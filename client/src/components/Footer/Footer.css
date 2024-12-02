@@ -1,0 +1,33 @@
+.footercontainer{
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    border: 2px solid #000000;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.addbtn{
+    background-color: #ffffff;
+    border:none;
+    padding: 0px;
+    border-radius: 50%;
+    display: flex; 
+}
+
+
+
+.navlinkfooter{
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+}
+
+
+.end{
+    padding-left: 20px;
+}
+
+.loginn{
+    font-size: 18px;
+}

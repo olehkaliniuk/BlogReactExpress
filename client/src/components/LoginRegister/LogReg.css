@@ -1,0 +1,43 @@
+.logregcontainer{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    column-gap: 20px;
+    background-color: #ffffff;
+    border: 2px solid #000000;
+    justify-content: space-between;
+    border-radius: 15px;
+    margin: 20px;
+    color: #000000;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.formlogreg{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    margin-top: 20px;
+}
+
+.formlogreg input{
+    background-color: #ffffff;
+    border: 2px solid #000000;;
+    padding: 10px;
+}
+
+.formlogreg button{
+    background-color: #ffffff;;
+    border: 2px solid #000000;;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.nav{
+    margin-top: 10px;
+    text-decoration: none;
+    color: #000000;
+    font-size: 14px;
+
+
+}
