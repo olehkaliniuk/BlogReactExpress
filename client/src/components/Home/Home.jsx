@@ -91,16 +91,16 @@ function Home() {
       <div className='homecontainer'>
         Home
         <div className='firstcont'>
+          <div></div>
           
           {posts.map((post, index) => (
-            <div key={index} className='maphome'>
+            <div key={index} >
+
+
+              <div className='maphome'>
+
               <p>{post.title} - {post.description} - {post.likes} - user_id:{post.user_id} - user_name : {post.username}</p>
-              <input
-                type="text"
-                value={newComment[post.id] || ""}
-                onChange={(e) => handleCommentChange(post.id, e.target.value)}
-                placeholder="Write a comment"
-              />
+            
               <div>
                 <button 
                   className='buttoncomment'
@@ -119,14 +119,33 @@ function Home() {
                   </button>
                 )}
               </div>
-              <div className="comments-section">
-                <h4>Comments:</h4>
+            
+
+
+              </div>
+
+              
+
+
+              <div className='commentssection'>
+              <input className='inputcomments'
+                type="text"
+                value={newComment[post.id] || ""}
+                onChange={(e) => handleCommentChange(post.id, e.target.value)}
+                placeholder="Write a comment"
+              />
+
+
+              <div>Comments:</div>
                 {post.comments && post.comments.map((comment, idx) => (
                   <div key={idx} className="comment">
-                    <p><strong>{comment.user_name}</strong>: {comment.comment_text}</p>
+                    <p><strong>{comment.user_name}</strong>: {comment.comment_text} </p> <div className='datee'> {comment.created_at}</div>
                   </div>
                 ))}
+
               </div>
+
+
             </div>
           ))}
         </div>

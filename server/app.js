@@ -106,7 +106,7 @@ app.get('/comments/:postId', async (req, res) => {
   const { postId } = req.params;
   try {
     const [comments] = await connection.query(`
-      SELECT comments.id, comments.comment_text, users.user_name
+      SELECT comments.id, comments.comment_text, users.user_name, created_at
       FROM comments
       JOIN users ON comments.user_id = users.id
       WHERE post_id = ?
