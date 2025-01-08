@@ -88,20 +88,57 @@ app.get("/username", async (req, res) => {
 });
 
 // Delete post
-app.delete('/:id', async (req, res) => {
+app.delete('/delete/:id', async (req, res) => {
   const { id } = req.params;
   await connection.query('DELETE FROM posts WHERE id = ?', [id]);
   res.send('Post deleted');
 });
 
 // Like post
-app.post('/:id', async (req, res) => {
+app.post('/like/:id', async (req, res) => {
   const { id } = req.params;
   await connection.query('UPDATE posts SET likes = likes + 1 WHERE id = ?', [id]);
   res.send('Like added');
 });
 
+// comments show
+app.get('/comments/:postId', async (req, res) => {
+  const { postId } = req.params;
+  try {
+    const [comments] = await connection.query(`
+      SELECT comments.id, comments.comment_text, users.user_name
+      FROM comments
+      JOIN users ON comments.user_id = users.id
+      WHERE post_id = ?
+    `, [postId]);
+    res.json(comments);
+  } catch (error) {
+    console.error('Error fetching comments:', error);
+    res.status(500).send('Error fetching comments');
+  }
+});
 
+
+
+//create comment
+app.post('/createcomment', async (req, res) => {
+  const { post_id, user_id, comment_text } = req.body;
+  console.log('Received data:', { post_id, user_id, comment_text });
+  if (!post_id || !user_id || !comment_text) {
+    return res.status(400).json({ error: "Post ID, User ID, and comment text are required" });
+  }
+  try {
+    const result = await connection.query(
+      'INSERT INTO comments (post_id, user_id, comment_text) VALUES (?, ?, ?)',
+      [post_id, user_id, comment_text]
+    );
+    console.log('Query result:', result);
+    res.status(201).send('Comment created');
+  } catch (error) {
+    console.error('Error creating comment:', error);
+    res.status(500).json({ error: 'Error creating comment' });
+  }
+});
 
 // Start server
 app.listen(PORT, () => {

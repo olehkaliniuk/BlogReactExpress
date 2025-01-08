@@ -48,7 +48,7 @@ function Footer() {
       )}
      
     </div>
-    <div className='end'>Oleh Kaliniuk 2024</div>
+    <div className='end'>Oleh Kaliniuk 2025</div>
     </div>
   )
 }

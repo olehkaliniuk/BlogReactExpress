@@ -25,7 +25,7 @@ function Navbar() {
 
   return (
     <div className="navcontainer">
-      <div className="logo">MyStore</div>
+      <div className="logo">MySocialNetwork</div>
       <div>
         <NavLink className="navlink" to="/">Home</NavLink>
         <NavLink className="navlink" to="/favourites">Favourites</NavLink>
