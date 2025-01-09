@@ -8,6 +8,7 @@ function MyPosts() {
   const [posts, setPosts] = useState([]);
   const [newComment, setNewComment] = useState({});
   const userID = useSelector((state) => state.user.user_id);
+  const [visibility, setVisibility] = useState({});  
 
  
   const fetchUserPosts = async () => {
@@ -67,6 +68,15 @@ function MyPosts() {
     setNewComment({ ...newComment, [postId]: text });
   };
 
+
+  const toggleVisibility = (postId) => {
+    setVisibility((prevVisibility) => ({
+      ...prevVisibility,
+      [postId]: !prevVisibility[postId],
+    }));
+  };
+
+
   return (
     <>
     <div className="mypostscontainer">
@@ -77,40 +87,49 @@ function MyPosts() {
             posts.map((post, index) => (
               <div key={index} >
 
-                <div className='maphome'>
-                <p>{post.title} - {post.description} - {post.likes}</p>
+              <div className='maphome'>
+                <p>{post.title} - {post.description} - {post.likes} - user_id:{post.user_id} - user_name : {post.username}</p>
+              
                 <div>
-                <button 
-                  className='buttoncomment'
-                  onClick={() => handleAddComment(post.id)}
-                >
-                  Add comment
-                </button>
-                <button onClick={() => handleDelete(post.id)} className='buttonlike'>Delete</button>
+                  <button className='buttoncomment' onClick={() => toggleVisibility(post.id)}>
+                    {visibility[post.id] ? "Hide Comments" : "Add/Show Comments"}
+                  </button>
+                  {post.user_id === userID && (
+                    <button onClick={() => handleDelete(post.id)} className='buttonlike'>
+                      Delete
+                    </button>
+                  )}
                 </div>
-                </div>
-
-                <div className="comments-section">
-
-                <input
-                  type="text"
-                  value={newComment[post.id] || ""}
-                  onChange={(e) => handleCommentChange(post.id, e.target.value)}
-                  placeholder="Write a comment" className='inputcomments'
-                />
-                  <div>Comments:</div>
-                  {post.comments && post.comments.map((comment, idx) => (
-                    <div key={idx} className="comment">
-                    <p><strong>{comment.user_name}</strong>: {comment.comment_text} </p> <div className='datee'> {comment.created_at}</div>
-                    </div>
-                  ))}
-                </div>
-
-
-
-
-
               </div>
+
+              <div className='commentssection'>
+                <div className='inputcomments' style={{ display: visibility[post.id] ? "block" : "none" }}>
+                  <input 
+                    type="text"
+                    value={newComment[post.id] || ""}
+                    onChange={(e) => handleCommentChange(post.id, e.target.value)}
+                    placeholder="Write a comment"
+                  />
+                  <button onClick={() => handleAddComment(post.id)}>
+                    Post comment
+                  </button>
+                </div>
+
+
+                <div style={{ display: visibility[post.id] ? "block" : "none" }}>
+
+                <div >Comments:</div>
+                {post.comments && post.comments.map((comment, idx) => (
+                  <div key={idx} className="comment">
+                    <p><strong>{comment.user_name}</strong>: {comment.comment_text} </p> 
+                    <div className='datee'>{comment.created_at}</div>
+                  </div>
+                ))}
+
+               </div>
+              </div>
+
+            </div>
             ))
           ) : (
             <p>No posts available.</p>
